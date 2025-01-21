@@ -1,0 +1,17 @@
+{
+  "name": "Carioca - Tabla de resultados",
+  "short_name": "Carioca",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ecf0f1",
+  "theme_color": "#2c3e50",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%232c3e50'/><path d='M156 256a100 100 0 11200 0 100 100 0 01-200 0' fill='white'/></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
