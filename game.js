@@ -69,7 +69,8 @@ function startGame() {
 
   // Make sure share options are hidden at game start
   document.getElementById('shareOptions').classList.add('hidden');
-  
+  document.getElementById('restartButton').classList.add('hidden');
+
   updateScoreTable();
   document.getElementById('playerNames').classList.add('hidden');
   document.getElementById('gameBoard').classList.remove('hidden');
@@ -166,8 +167,9 @@ function endGame() {
   const cells = lastRow.getElementsByTagName('td');
   cells[winnerIndex + 1].classList.add('winner');
 
-  // Show sharing options
+  // Show sharing options and restart button
   document.getElementById('shareOptions').classList.remove('hidden');
+  document.getElementById('restartButton').classList.remove('hidden');
 
   // Announce winner
   alert(`¡Juego terminado! Ganador: ${players[winnerIndex]} con ${winningScore} puntos!`);
@@ -212,6 +214,20 @@ async function shareWhatsApp() {
   window.open(`https://wa.me/?text=${encodedSummary}`, '_blank');
 }
 
+function restartGame() {
+  players = [];
+  scores = [];
+  currentRound = 0;
+  currentPlayer = 0;
+
+  document.getElementById('gameBoard').classList.add('hidden');
+  document.getElementById('scoreInput').classList.add('hidden');
+  document.getElementById('shareOptions').classList.add('hidden');
+  document.getElementById('restartButton').classList.add('hidden');
+  document.getElementById('setup').classList.remove('hidden');
+  document.getElementById('playerCount').value = '2';
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   // Prevent double-tap zoom on buttons
   document.querySelectorAll('button').forEach(button => {
@@ -219,6 +235,8 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
     });
   });
+    
+  document.querySelector('.start-button').addEventListener('click', startApp);
 
   // Install service worker if supported
   if ('serviceWorker' in navigator) {
