@@ -1,10 +1,14 @@
 function startApp() {
+  console.log("Iniciar App"); // Añadamos un console.log para depuración
   document.getElementById('welcomeScreen').style.display = 'none';
   document.getElementById('mainContent').classList.add('visible');
   if ('vibrate' in navigator) {
     navigator.vibrate(50);
   }
 }
+
+document.querySelector('.start-button').addEventListener('click', startApp);
+document.querySelector('.start-button').addEventListener('touchend', startApp);
 
 const ROUNDS = [
   "2 Tríos",
