@@ -8,7 +8,7 @@ function startApp() {
 }
 
 document.querySelector('.start-button').addEventListener('click', startApp);
-document.querySelector('.start-button').addEventListener('touchend'startApp);
+document.querySelector('.start-button').addEventListener('pointerdown', startApp); 
 
 const ROUNDS = [
   "2 Tríos",
