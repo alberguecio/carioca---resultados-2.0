@@ -261,14 +261,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Prevención de zoom en doble toque 
+    // Prevención de zoom en doble toque (¡MUY IMPORTANTE!)
     document.addEventListener('touchstart', (event) => {
         if (event.touches.length > 1) {
             event.preventDefault();
         }
-    }, { passive: false }); 
+    }, { passive: false }); // ¡ESTO ES CRUCIAL!
 
-    // Service Worker 
+    // Service Worker (sin cambios)
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(console.error);
     }
