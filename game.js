@@ -52,23 +52,6 @@ function setupPlayers() {
     document.getElementById('playerNames').classList.remove('hidden');
 }
 
-  const playerInputs = document.getElementById('playerInputs');
-  playerInputs.innerHTML = '';
-  
-  for (let i = 0; i < playerCount; i++) {
-    const input = document.createElement('div');
-    input.className = 'input-group';
-    input.innerHTML = `
-      <label for="player${i}">Jugador ${i + 1}:</label>
-      <input type="text" id="player${i}" required>
-    `;
-    playerInputs.appendChild(input);
-  }
-
-  document.getElementById('setup').classList.add('hidden');
-  document.getElementById('playerNames').classList.remove('hidden');
-}
-
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('button').forEach(button => {
     button.addEventListener('touchend', e => {
