@@ -249,9 +249,10 @@ function restartGame() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Eventos con pointerdown para compatibilidad táctil y ratón
     document.querySelectorAll('.start-button, #setup button').forEach(button => {
         button.addEventListener('pointerdown', e => {
-            e.preventDefault();
+            e.preventDefault(); // Evita el comportamiento predeterminado (zoom, etc.)
             if (button.classList.contains('start-button')) {
                 startApp();
             } else if (button.parentElement.id === 'setup') {
@@ -260,14 +261,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Prevención de zoom en doble toque (esto debe aplicarse a elementos que podrían causar zoom)
+    // Prevención de zoom en doble toque 
     document.addEventListener('touchstart', (event) => {
         if (event.touches.length > 1) {
             event.preventDefault();
         }
-    }, { passive: false }); // `passive: false` es necesario para preventDefault en touchstart
+    }, { passive: false }); 
 
-    // Instalación del service worker (sin cambios)
+    // Service Worker 
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(console.error);
     }
