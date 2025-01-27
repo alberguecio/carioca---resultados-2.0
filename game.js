@@ -1,10 +1,10 @@
 function startApp() {
-  console.log("Iniciar App"); // Añadamos un console.log para depuración
-  document.getElementById('welcomeScreen').style.display = 'none';
-  document.getElementById('mainContent').classList.add('visible');
-  if ('vibrate' in navigator) {
-    navigator.vibrate(50);
-  }
+    console.log("Iniciar App");
+    document.getElementById('welcomeScreen').style.display = 'none';
+    document.getElementById('mainContent').classList.add('visible');
+    if ('vibrate' in navigator) {
+        navigator.vibrate(50);
+    }
 }
 
 document.querySelector('.start-button').addEventListener('click', startApp);
@@ -249,17 +249,27 @@ function restartGame() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Prevent double-tap zoom on buttons
-  document.querySelectorAll('button').forEach(button => {
-    button.addEventListener('touchend', e => {
-      e.preventDefault();
+    // Manejo unificado de eventos con pointerdown
+    document.querySelectorAll('.start-button, #setup button').forEach(button => {
+        button.addEventListener('pointerdown', e => {
+            e.preventDefault(); // Evita el comportamiento predeterminado (zoom, etc.)
+            if (button.classList.contains('start-button')) {
+                startApp();
+            } else if (button.parentElement.id === 'setup') {
+                setupPlayers();
+            }
+        });
     });
-  });
-    
-  document.querySelector('.start-button').addEventListener('click', startApp);
 
-  // Install service worker if supported
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').catch(console.error);
-  }
+    // Prevención de zoom en doble toque (esto debe aplicarse a elementos que podrían causar zoom)
+    document.addEventListener('touchstart', (event) => {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    }, { passive: false }); // `passive: false` es necesario para preventDefault en touchstart
+
+    // Instalación del service worker (sin cambios)
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').catch(console.error);
+    }
 });
