@@ -52,6 +52,22 @@ function setupPlayers() {
   document.getElementById('playerNames').classList.remove('hidden');
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('touchend', e => {
+      e.preventDefault();
+    });
+  });
+  
+  document.querySelector('.start-button').addEventListener('click', startApp);
+  document.querySelector('.start-button').addEventListener('touchend', startApp);
+  document.querySelector('#setup button').addEventListener('click', setupPlayers);
+  document.querySelector('#setup button').addEventListener('touchend', setupPlayers);
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').catch(console.error);
+  
+
 function startGame() {
   const playerInputs = document.querySelectorAll('#playerInputs input');
   players = Array.from(playerInputs).map(input => input.value.trim());
