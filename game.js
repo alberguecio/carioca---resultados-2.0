@@ -249,10 +249,9 @@ function restartGame() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Manejo unificado de eventos con pointerdown
     document.querySelectorAll('.start-button, #setup button').forEach(button => {
         button.addEventListener('pointerdown', e => {
-            e.preventDefault(); // Evita el comportamiento predeterminado (zoom, etc.)
+            e.preventDefault();
             if (button.classList.contains('start-button')) {
                 startApp();
             } else if (button.parentElement.id === 'setup') {
