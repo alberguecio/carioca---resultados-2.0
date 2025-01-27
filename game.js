@@ -259,7 +259,6 @@ function restartGame() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Eventos con pointerdown (¡SOLO pointerdown, para todos los botones!)
     document.querySelectorAll('.start-button, #setup button').forEach(button => {
         button.addEventListener('pointerdown', e => {
             e.preventDefault();
@@ -271,14 +270,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Prevención de zoom en doble toque (¡MUY IMPORTANTE!)
     document.addEventListener('touchstart', (event) => {
         if (event.touches.length > 1) {
             event.preventDefault();
         }
     }, { passive: false });
 
-    // Service Worker
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(console.error);
     }
