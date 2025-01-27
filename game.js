@@ -249,10 +249,10 @@ function restartGame() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Eventos con pointerdown para compatibilidad táctil y ratón
+    // Eventos con pointerdown
     document.querySelectorAll('.start-button, #setup button').forEach(button => {
         button.addEventListener('pointerdown', e => {
-            e.preventDefault(); // Evita el comportamiento predeterminado (zoom, etc.)
+            e.preventDefault();
             if (button.classList.contains('start-button')) {
                 startApp();
             } else if (button.parentElement.id === 'setup') {
@@ -261,14 +261,14 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Prevención de zoom en doble toque (¡MUY IMPORTANTE!)
+    // Prevención de zoom en doble toque
     document.addEventListener('touchstart', (event) => {
         if (event.touches.length > 1) {
             event.preventDefault();
         }
-    }, { passive: false }); // ¡ESTO ES CRUCIAL!
+    }, { passive: false });
 
-    // Service Worker (sin cambios)
+    // Service Worker
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('sw.js').catch(console.error);
     }
