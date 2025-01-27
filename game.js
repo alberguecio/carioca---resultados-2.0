@@ -67,7 +67,7 @@ function setupPlayers() {
 
   document.getElementById('setup').classList.add('hidden');
   document.getElementById('playerNames').classList.remove('hidden');
-}
+};
 
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('button').forEach(button => {
