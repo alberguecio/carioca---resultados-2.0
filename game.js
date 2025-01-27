@@ -29,11 +29,28 @@ let currentRound = 0;
 let currentPlayer = 0;
 
 function setupPlayers() {
-  const playerCount = parseInt(document.getElementById('playerCount').value);
-  if (playerCount < 2 || playerCount > 6) {
-    alert('Por favor ingrese un número de jugadores entre 2 y 6');
-    return;
-  }
+    const playerCount = parseInt(document.getElementById('playerCount').value);
+    if (playerCount < 2 || playerCount > 6) {
+        alert('Por favor ingrese un número de jugadores entre 2 y 6');
+        return;
+    }
+
+    const playerInputs = document.getElementById('playerInputs');
+    playerInputs.innerHTML = '';
+
+    for (let i = 0; i < playerCount; i++) {
+        const input = document.createElement('div');
+        input.className = 'input-group';
+        input.innerHTML = `
+            <label for="player${i}">Jugador ${i + 1}:</label>
+            <input type="text" id="player${i}" required>
+        `;
+        playerInputs.appendChild(input);
+    }
+
+    document.getElementById('setup').classList.add('hidden');
+    document.getElementById('playerNames').classList.remove('hidden');
+}
 
   const playerInputs = document.getElementById('playerInputs');
   playerInputs.innerHTML = '';
@@ -249,7 +266,7 @@ function restartGame() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Eventos con pointerdown
+    // Eventos con pointerdown (¡SOLO pointerdown, para todos los botones!)
     document.querySelectorAll('.start-button, #setup button').forEach(button => {
         button.addEventListener('pointerdown', e => {
             e.preventDefault();
@@ -261,7 +278,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Prevención de zoom en doble toque
+    // Prevención de zoom en doble toque (¡MUY IMPORTANTE!)
     document.addEventListener('touchstart', (event) => {
         if (event.touches.length > 1) {
             event.preventDefault();
