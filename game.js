@@ -116,22 +116,32 @@ function startGame() {
 }
 
 function updateScoreTable() {
-  const tbody = document.querySelector('#scoreTable tbody');
-  tbody.innerHTML = '';
+    const tbody = document.querySelector('#scoreTable tbody');
+    tbody.innerHTML = '';
 
-  // Add rows for each round
-  ROUNDS.forEach((round, roundIndex) => {
-    const tr = document.createElement('tr');
-    tr.innerHTML = `<td>${round}</td>`;
-    
-    players.forEach((_, playerIndex) => {
-      const score = scores[roundIndex][playerIndex];
-      const total = calculateTotalForPlayer(playerIndex, roundIndex);
-      tr.innerHTML += `<td>${score !== null ? `${score} (${total})` : '-'}</td>`;
+    ROUNDS.forEach((round, roundIndex) => {
+        const tr = document.createElement('tr');
+        let trHTML = `<td>${round}</td>`; // Inicializa la variable trHTML
+
+        players.forEach((_, playerIndex) => {
+            const score = scores[roundIndex][playerIndex];
+            const total = calculateTotalForPlayer(playerIndex, roundIndex);
+            trHTML += `<td>${score !== null ? `<span class="math-inline">\{score\} \(</span>{total})` : '-'}</td>`; // Concatenación CORRECTA
+        });
+
+        tr.innerHTML = trHTML; // Asigna el HTML completo al tr
+        tbody.appendChild(tr);
     });
-    
-    tbody.appendChild(tr);
-  });
+
+    const totalRow = document.createElement('tr');
+        let totalRowHTML = '<td><strong>Total Final</strong></td>'; // Inicializa la variable totalRowHTML
+    players.forEach((_, playerIndex) => {
+        const total = calculateTotalForPlayer(playerIndex);
+        totalRowHTML += `<td><strong>${total}</strong></td>`; // Concatenación CORRECTA
+    });
+    totalRow.innerHTML = totalRowHTML; // Asigna el HTML completo al totalRow
+    tbody.appendChild(totalRow);
+}
 
   // Add total row
   const totalRow = document.createElement('tr');
